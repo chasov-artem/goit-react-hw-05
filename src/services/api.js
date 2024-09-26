@@ -8,3 +8,15 @@ export const fetchMovies = async () => {
   const { data } = await axios.get(`/movie/popular?api_key=${API_KEY}`);
   return data.results;
 };
+
+export const fetchMovieById = async (movieId) => {
+  const { data } = await axios.get(`/movie/${movieId}?api_key=${API_KEY}`);
+  return data;
+};
+
+export const fetchCastByMovieId = async (movieId) => {
+  const { data } = await axios.get(
+    `/movie/${movieId}/credits?api_key=${API_KEY}`
+  );
+  return data.cast;
+};
