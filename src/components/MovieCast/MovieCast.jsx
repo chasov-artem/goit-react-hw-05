@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchCastByMovieId } from "../../services/api";
 import { useParams } from "react-router-dom";
 
-const Cast = () => {
+const MovieCast = () => {
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
 
@@ -13,6 +13,10 @@ const Cast = () => {
     };
     getData();
   }, [movieId]);
+
+  if (!actors) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
@@ -35,4 +39,4 @@ const Cast = () => {
     </div>
   );
 };
-export default Cast;
+export default MovieCast;

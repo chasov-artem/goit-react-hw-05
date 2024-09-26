@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchReviewsByMovieId } from "../../services/api";
 
-const Reviews = () => {
+const MovieReviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
 
@@ -13,7 +13,11 @@ const Reviews = () => {
     };
     getData();
   }, [movieId]);
-  console.log(reviews);
+
+  if (!reviews) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div>
       {reviews.length > 0 ? (
@@ -31,4 +35,4 @@ const Reviews = () => {
     </div>
   );
 };
-export default Reviews;
+export default MovieReviews;
