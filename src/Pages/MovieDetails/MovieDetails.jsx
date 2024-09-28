@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { fetchMovieById } from "../../services/api";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
+  const location = useLocation();
+  console.log(location);
+
   const [movie, setMovie] = useState(null);
   useEffect(() => {
     const getData = async () => {
@@ -18,6 +27,7 @@ const MovieDetails = () => {
   }
   return (
     <div>
+      <Link>Go Back</Link>
       <div>
         <img
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
