@@ -1,12 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-} from "react-router-dom";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { fetchMovieById } from "../../services/api";
+import Navigates from "../../components/Navigates/Navigates";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -47,10 +42,11 @@ const MovieDetails = () => {
       </div>
       <hr />
       <div>
-        <NavLink to="cast">Cast</NavLink>
-        <NavLink to="reviews">Reviews</NavLink>
+        <Navigates />
       </div>
-      <Outlet />
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
