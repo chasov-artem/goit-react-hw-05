@@ -1,6 +1,6 @@
 import { Field, Formik, Form } from "formik";
 import { useEffect, useMemo, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { fetchSearchMovies } from "../../services/api";
 
 const MoviesPage = () => {
@@ -10,6 +10,8 @@ const MoviesPage = () => {
   const query = searchParams.get("query") ?? "";
 
   const initialValues = { query: "" };
+
+  const location = useLocation();
 
   useEffect(() => {
     const getMovies = async () => {
@@ -60,7 +62,7 @@ const MoviesPage = () => {
         <ul>
           {filteredData?.map((movie) => (
             <li key={movie.id}>
-              <Link to={`${movie.id.toString()}`}>
+              <Link to={`${movie.id.toString()}`} state={location}>
                 <p>{movie.title}</p>
               </Link>
             </li>

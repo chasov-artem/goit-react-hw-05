@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Link,
   NavLink,
@@ -11,7 +11,8 @@ import { fetchMovieById } from "../../services/api";
 const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
-  console.log(location);
+
+  const goBackRef = useRef(location.state);
 
   const [movie, setMovie] = useState(null);
   useEffect(() => {
@@ -27,7 +28,7 @@ const MovieDetails = () => {
   }
   return (
     <div>
-      <Link>Go Back</Link>
+      <Link to={goBackRef.current ?? "/movies"}>Go Back</Link>
       <div>
         <img
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
