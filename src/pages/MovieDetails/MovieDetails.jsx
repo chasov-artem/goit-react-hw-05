@@ -1,8 +1,8 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
-import { fetchMovieById } from "../../../services/api";
-import Navigates from "../../../components/Navigates/Navigates";
-import Loader from "../../../components/Loader/Loader";
+import { fetchMovieById } from "../../services/api";
+import Navigates from "../../components/Navigates/Navigates";
+import Loader from "../../components/Loader/Loader";
 import s from "./MovieDetails.module.css";
 
 const MovieDetails = () => {
