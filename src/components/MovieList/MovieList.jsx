@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchMovies } from "../../services/api";
 import { Link, useLocation } from "react-router-dom";
+import s from "./MovieList.module.css";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -13,11 +14,12 @@ const MovieList = () => {
     };
     getAllMovies();
   }, []);
+
   return (
-    <div>
+    <div className={s.movieListWrapper}>
       <ul>
         {movies?.map((movie) => (
-          <li key={movie.id}>
+          <li className={s.movieItem} key={movie.id}>
             <Link to={`movies/${movie.id.toString()}`} state={location}>
               <p>{movie.title}</p>
             </Link>
@@ -27,4 +29,5 @@ const MovieList = () => {
     </div>
   );
 };
+
 export default MovieList;

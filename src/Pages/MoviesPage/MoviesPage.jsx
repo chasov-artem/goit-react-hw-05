@@ -2,6 +2,7 @@ import { Field, Formik, Form } from "formik";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { fetchSearchMovies } from "../../services/api";
+import s from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
@@ -46,15 +47,21 @@ const MoviesPage = () => {
   );
 
   if (!movies) {
-    <h3>Loading...</h3>;
+    <h2>Loading...</h2>;
   }
 
   return (
     <>
       <Formik initialValues={initialValues} onSubmit={handleSearhSubmit}>
-        <Form>
-          <Field name="query" placeholder="Enter movie name..."></Field>
-          <button type="submit">Search</button>
+        <Form className={s.wrapper}>
+          <Field
+            className={s.searchInput}
+            name="query"
+            placeholder="Enter movie name..."
+          ></Field>
+          <button type="submit" className={s.btn}>
+            Search
+          </button>
         </Form>
       </Formik>
 
