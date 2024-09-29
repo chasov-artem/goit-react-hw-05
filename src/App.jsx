@@ -4,10 +4,10 @@ import Header from "./components/Header/Header";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader/Loader";
 
-const HomePage = lazy(() => import("./Pages/HomePage/HomePage"));
-const MoviesPage = lazy(() => import("./Pages/MoviesPage/MoviesPage"));
-const NotFound = lazy(() => import("./Pages/NotFound/NotFound"));
-const MovieDetails = lazy(() => import("./Pages/MovieDetails/MovieDetails"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+const MovieDetails = lazy(() => import("./pages/MovieDetails/MovieDetails"));
 const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
 const MovieReviews = lazy(() =>
   import("./components/MovieReviews/MovieReviews")

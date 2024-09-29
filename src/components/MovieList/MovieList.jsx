@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchMovies } from "../../services/api";
+
 import { Link, useLocation } from "react-router-dom";
 import s from "./MovieList.module.css";
+import { fetchMovies } from "../../services/api";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
