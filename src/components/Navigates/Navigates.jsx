@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import s from "./Navigates.module.css";
 import clsx from "clsx";
+import s from "./Navigates.module.css";
 
 const Navigates = () => {
   const buildLinkClass = ({ isActive }) => {
