@@ -7,6 +7,7 @@ import s from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") ?? "";
   const location = useLocation();
@@ -16,17 +17,17 @@ const MoviesPage = () => {
   useEffect(() => {
     const getMovies = async () => {
       if (query) {
+        setIsLoading(true);
         const data = await fetchSearchMovies(query);
         setMovies(data);
+        setIsLoading(false);
       }
     };
     getMovies();
   }, [query]);
 
-  const handleSearchSubmit = async (values) => {
-    const data = await fetchSearchMovies(values.query);
+  const handleSearchSubmit = (values) => {
     handleChangeQuery(values.query);
-    setMovies(data);
   };
 
   const handleChangeQuery = (newQuery) => {
@@ -60,7 +61,13 @@ const MoviesPage = () => {
         </Form>
       </Formik>
 
-      {movies.length > 0 && (
+      {isLoading && <p>Loading movies...</p>}
+
+      {!isLoading && movies?.length === 0 && query && (
+        <p>No movies found for this query</p>
+      )}
+
+      {movies?.length > 0 && (
         <MovieList movies={filteredData} location={location} />
       )}
     </>
