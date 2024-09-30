@@ -1,18 +1,17 @@
 import { Field, Formik, Form } from "formik";
 import { useEffect, useMemo, useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { fetchSearchMovies } from "../../services/api";
+import MovieList from "../../components/MovieList/MovieList";
 import s from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") ?? "";
+  const location = useLocation();
 
   const initialValues = { query: "" };
-
-  const location = useLocation();
 
   useEffect(() => {
     const getMovies = async () => {
@@ -24,7 +23,7 @@ const MoviesPage = () => {
     getMovies();
   }, [query]);
 
-  const handleSearhSubmit = async (values) => {
+  const handleSearchSubmit = async (values) => {
     const data = await fetchSearchMovies(values.query);
     handleChangeQuery(values.query);
     setMovies(data);
@@ -46,19 +45,15 @@ const MoviesPage = () => {
     [query, movies]
   );
 
-  if (!movies) {
-    <h2>Loading...</h2>;
-  }
-
   return (
     <>
-      <Formik initialValues={initialValues} onSubmit={handleSearhSubmit}>
+      <Formik initialValues={initialValues} onSubmit={handleSearchSubmit}>
         <Form className={s.wrapper}>
           <Field
             className={s.searchInput}
             name="query"
             placeholder="Enter movie name..."
-          ></Field>
+          />
           <button type="submit" className={s.btn}>
             Search
           </button>
@@ -66,17 +61,10 @@ const MoviesPage = () => {
       </Formik>
 
       {movies.length > 0 && (
-        <ul>
-          {filteredData?.map((movie) => (
-            <li key={movie.id}>
-              <Link to={`${movie.id.toString()}`} state={location}>
-                <p>{movie.title}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <MovieList movies={filteredData} location={location} />
       )}
     </>
   );
 };
+
 export default MoviesPage;

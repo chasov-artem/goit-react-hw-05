@@ -9,8 +9,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
 
-  const goBackRef = useRef(location.state);
-
+  const goBackRef = useRef(location.state?.from);
   const [movie, setMovie] = useState(null);
   useEffect(() => {
     const getData = async () => {
@@ -23,6 +22,7 @@ const MovieDetails = () => {
   if (!movie) {
     return <h2>Loading...</h2>;
   }
+
   return (
     <div className={s.wrapper}>
       <Link className={s.goBackButton} to={goBackRef.current ?? "/movies"}>
@@ -43,7 +43,7 @@ const MovieDetails = () => {
           <h3>Overview</h3>
           <p>{movie.overview}</p>
           <h3>Genres</h3>
-          <p>{movie.genres.map((genre) => genre.name).join(" ")}</p>
+          <p>{movie.genres.map((genre) => genre.name).join(", ")}</p>
         </div>
       </div>
       <hr />
