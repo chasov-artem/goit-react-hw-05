@@ -6,17 +6,23 @@ import s from "./MovieCast.module.css";
 const MovieCast = () => {
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
       const data = await fetchCastByMovieId(movieId);
       setActors(data);
+      setIsLoading(false);
     };
     getData();
   }, [movieId]);
 
-  if (!actors) {
+  if (isLoading) {
     return <h2>Loading...</h2>;
+  }
+
+  if (actors.length === 0) {
+    return <h2>No actors found</h2>;
   }
 
   return (
@@ -40,4 +46,5 @@ const MovieCast = () => {
     </div>
   );
 };
+
 export default MovieCast;

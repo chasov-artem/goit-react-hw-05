@@ -3,14 +3,15 @@ import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { fetchMovieById } from "../../services/api";
 import Navigates from "../../components/Navigates/Navigates";
 import Loader from "../../components/Loader/Loader";
-import s from "./MovieDetails.module.css";
+import s from "./MovieDetailsPage.module.css";
 
-const MovieDetails = () => {
+const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const location = useLocation();
 
   const goBackRef = useRef(location.state?.from);
   const [movie, setMovie] = useState(null);
+
   useEffect(() => {
     const getData = async () => {
       const data = await fetchMovieById(movieId);
@@ -58,4 +59,4 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default MovieDetailsPage;
